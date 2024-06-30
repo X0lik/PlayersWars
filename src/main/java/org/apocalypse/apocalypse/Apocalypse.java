@@ -24,7 +24,8 @@ public final class Apocalypse extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + "Apocalypse enabled");
-        getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + "Our Discord: " + ChatColor.BLUE + "https://discord.gg/UuSJ8jN59w");
+        getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + "Our Discord: " + ChatColor.DARK_AQUA + "https://discord.gg/UuSJ8jN59w");
+        getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + "Github: " + ChatColor.DARK_BLUE + "https://github.com/X0lik/players_wars");
         try {
             // Ensure the plugin's data folder exists
             if (!getDataFolder().exists()) {

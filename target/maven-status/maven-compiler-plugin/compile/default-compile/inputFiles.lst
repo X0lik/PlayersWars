@@ -1,3 +1,6 @@
+D:\JavaProjects\Apocalypse\src\main\java\org\apocalypse\apocalypse\database\Database.java
+D:\JavaProjects\Apocalypse\src\main\java\org\apocalypse\apocalypse\commands\loadwar.java
 D:\JavaProjects\Apocalypse\src\main\java\org\apocalypse\apocalypse\commands\setwar.java
 D:\JavaProjects\Apocalypse\src\main\java\org\apocalypse\apocalypse\Apocalypse.java
-D:\JavaProjects\Apocalypse\src\main\java\org\apocalypse\apocalypse\database\PointsDatabase.java
+D:\JavaProjects\Apocalypse\src\main\java\org\apocalypse\apocalypse\commands\clearwar.java
+D:\JavaProjects\Apocalypse\src\main\java\org\apocalypse\apocalypse\commands\debugwar.java

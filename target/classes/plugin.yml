@@ -1,4 +1,4 @@
-name: Apocalypse
+name: PlayersWars
 author: X0lik
 version: '1.0-SNAPSHOT'
 main: org.apocalypse.apocalypse.Apocalypse
@@ -7,11 +7,15 @@ main: org.apocalypse.apocalypse.Apocalypse
 commands:
   setwar:
     description: set players war
-    usage: /setwar
+    usage: /war
+    permission: playerwars.war.setwar
   clearwar:
     description: clear player war
     usage: /clearwar
+    permission: playerwars.war.clearwar
   debugwar:
     usage: /debugwar
+    permission: playerwars.war.debugwar
   loadwar:
     usage: /loadwar
+    permission: playerwars.war.loadwar

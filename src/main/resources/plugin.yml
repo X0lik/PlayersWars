@@ -1,11 +1,11 @@
-name: Players Wars
+name: PlayersWars
 author: X0lik
 version: '${project.version}'
 main: org.apocalypse.apocalypse.Apocalypse
 #api-version: '1.21'
 
 commands:
-  war:
+  setwar:
     description: set players war
     usage: /war
     permission: playerwars.war.setwar
