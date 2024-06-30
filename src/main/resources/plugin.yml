@@ -1,0 +1,21 @@
+name: Players Wars
+author: X0lik
+version: '${project.version}'
+main: org.apocalypse.apocalypse.Apocalypse
+#api-version: '1.21'
+
+commands:
+  war:
+    description: set players war
+    usage: /war
+    permission: playerwars.war.setwar
+  clearwar:
+    description: clear player war
+    usage: /clearwar
+    permission: playerwars.war.clearwar
+  debugwar:
+    usage: /debugwar
+    permission: playerwars.war.debugwar
+  loadwar:
+    usage: /loadwar
+    permission: playerwars.war.loadwar

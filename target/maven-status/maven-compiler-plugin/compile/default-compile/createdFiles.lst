@@ -1,0 +1,5 @@
+org\apocalypse\apocalypse\commands\loadwar.class
+org\apocalypse\apocalypse\commands\setwar.class
+org\apocalypse\apocalypse\commands\clearwar.class
+org\apocalypse\apocalypse\commands\debugwar.class
+org\apocalypse\apocalypse\database\Database.class

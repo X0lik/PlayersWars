@@ -1,0 +1,17 @@
+name: Apocalypse
+author: X0lik
+version: '1.0-SNAPSHOT'
+main: org.apocalypse.apocalypse.Apocalypse
+#api-version: '1.21'
+
+commands:
+  setwar:
+    description: set players war
+    usage: /setwar
+  clearwar:
+    description: clear player war
+    usage: /clearwar
+  debugwar:
+    usage: /debugwar
+  loadwar:
+    usage: /loadwar
