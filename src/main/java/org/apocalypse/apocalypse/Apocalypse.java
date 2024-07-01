@@ -14,7 +14,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.entity.Player;
-import org.bukkit.GameMode;
 
 import java.sql.SQLException;
 
@@ -61,16 +60,8 @@ public final class Apocalypse extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    public void onBlockDamage( BlockBreakEvent e ) {
-        System.out.println( "Block has been broken" );
-        Player ply = e.getPlayer();
-        ply.setGameMode( GameMode.SURVIVAL );
-    }
-
-    @EventHandler
     public void onPlayerJoin( PlayerJoinEvent e ) {
         Player ply = e.getPlayer();
         loadwar.loadPlayer( db, ply, false );
-        getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + "Player loaded!");
     }
 }
