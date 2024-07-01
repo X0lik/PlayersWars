@@ -1,22 +1,39 @@
 package org.apocalypse.apocalypse.commands;
 
 import net.md_5.bungee.api.ChatColor;
-import org.apocalypse.apocalypse.Apocalypse;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.apocalypse.apocalypse.database.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static org.bukkit.Bukkit.getServer;
 
 public class loadwar implements CommandExecutor {
 
-    private final Apocalypse apocalypse;
-
-    public loadwar(Apocalypse apocalypse ){
-        this.apocalypse = apocalypse;
+    private final Database db;
+    public loadwar(Database db){
+        this.db = db;
     }
+
+    public static void loadPlayer(Database db, Player ply, boolean force){
+        try{
+            String[] params = { ply.getUniqueId().toString() };
+            ResultSet res = db.dbQuery( "SELECT * FROM xd_apocalypse WHERE uuid = ?", 1, params );
+            if (!res.next() || force ){
+                String[] sParams = { ply.getUniqueId().toString(), ply.getDisplayName(), "", "" };
+                db.dbUpdate( "INSERT OR IGNORE INTO xd_apocalypse (uuid, username, wars, alliances) VALUES( ?, ?, ?, ? )", 4, sParams );
+            }
+        } catch( SQLException err ){
+            getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.DARK_RED + "Database Error: " + ChatColor.WHITE + err.getErrorCode() + " - " + err.getMessage() );
+        }
+    };
 
     @Override
     public boolean onCommand(CommandSender ply, Command cmd, String str, String[] args ){
@@ -33,15 +50,7 @@ public class loadwar implements CommandExecutor {
             return true;
         }
 
-
-        try{
-            this.apocalypse.getDatabase().loadPlayer( target, true );
-        } catch( SQLException err ){
-            err.printStackTrace();
-            ply.sendMessage( ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.RED + "Something went wrong with database" );
-            return true;
-        }
-
+        loadPlayer( this.db, target, true );
         ply.sendMessage( ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + "Player was loaded!" );
         return true;
     }
