@@ -1,7 +1,7 @@
 name: PlayersWars
 author: X0lik
 version: '1.0-SNAPSHOT'
-main: org.apocalypse.apocalypse.Apocalypse
+main: org.playerswars.playerswars.PlayersWars
 #api-version: '1.21'
 
 commands:
