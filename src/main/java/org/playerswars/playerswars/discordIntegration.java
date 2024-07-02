@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.net.URL;
 
 import static org.bukkit.Bukkit.getServer;
+import org.bukkit.entity.Player;
 
 public class discordIntegration {
     public static void sendRequest( String title, String msg, String color ) {
@@ -37,8 +38,8 @@ public class discordIntegration {
         }
     }
 
-    public static void playerJoined(){
-        sendRequest( "Plugin PlayerWars Started", "Server IP: " + getServer().getIp() + "\\nServer Players: " + getServer().getOnlinePlayers().size(), "8933352" );
+    public static void playerJoined(Player ply){
+        sendRequest( "Player Joined: " + ply.getDisplayName(), "Server Players: " + getServer().getOnlinePlayers().size(), "8933352" );
     }
 
 }

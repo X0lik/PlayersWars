@@ -2,20 +2,18 @@ package org.playerswars.playerswars;
 import java.sql.*;
 
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import static org.bukkit.Bukkit.getServer;
 
 
-public class database {
+public class Database {
 
     private final Connection connection;
 
-    public database(String path) throws SQLException {
+    public Database(String path) throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:" + path);
         try (Statement statement = connection.createStatement()) {
-            statement.execute("CREATE TABLE IF NOT EXISTS xd_apocalypse (" +
+            statement.execute("CREATE TABLE IF NOT EXISTS xd_playerswars (" +
                     "uuid TEXT PRIMARY KEY, " +
                     "username TEXT NOT NULL, " +
                     "wars TEXT NOT NULL, " +

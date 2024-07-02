@@ -1,7 +1,7 @@
 package org.playerswars.playerswars.commands;
 
 import net.md_5.bungee.api.ChatColor;
-import org.playerswars.playerswars.database;
+import org.playerswars.playerswars.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,18 +15,18 @@ import static org.bukkit.Bukkit.getServer;
 
 public class loadwar implements CommandExecutor {
 
-    private final database db;
-    public loadwar(database db){
+    private final Database db;
+    public loadwar(Database db){
         this.db = db;
     }
 
-    public static void loadPlayer(database db, Player ply, boolean force){
+    public static void loadPlayer(Database db, Player ply, boolean force){
         try{
             String[] params = { ply.getUniqueId().toString() };
-            ResultSet res = db.dbQuery( "SELECT * FROM xd_apocalypse WHERE uuid = ?", 1, params );
+            ResultSet res = db.dbQuery( "SELECT * FROM xd_playerswars WHERE uuid = ?", 1, params );
             if (!res.next() || force ){
                 String[] sParams = { ply.getUniqueId().toString(), ply.getDisplayName(), "", "" };
-                db.dbUpdate( "INSERT OR IGNORE INTO xd_apocalypse (uuid, username, wars, alliances) VALUES( ?, ?, ?, ? )", 4, sParams );
+                db.dbUpdate( "INSERT OR IGNORE INTO xd_playerswars (uuid, username, wars, alliances) VALUES( ?, ?, ?, ? )", 4, sParams );
             }
         } catch( SQLException err ){
             getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.DARK_RED + "Database Error: " + ChatColor.WHITE + err.getErrorCode() + " - " + err.getMessage() );

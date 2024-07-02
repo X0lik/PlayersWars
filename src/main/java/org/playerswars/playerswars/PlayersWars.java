@@ -7,6 +7,8 @@ import org.playerswars.playerswars.commands.setwar;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +19,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public final class PlayersWars extends JavaPlugin implements Listener {
 
-    private database db;
+    private Database db;
     @Override
     public void onEnable() {
         getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + "Thanks for using PlayersWars!");
@@ -27,7 +29,7 @@ public final class PlayersWars extends JavaPlugin implements Listener {
             if (!getDataFolder().exists()) {
                 getDataFolder().mkdirs();
             }
-            db = new database(getDataFolder().getAbsolutePath() + "/playerswars.db");
+            db = new Database(getDataFolder().getAbsolutePath() + "/playerswars.db");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to connect to database! " + e.getMessage());
@@ -42,7 +44,7 @@ public final class PlayersWars extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
     }
 
-    public database getDatabase(){
+    public Database getDatabase(){
         return this.db;
     }
 
@@ -60,6 +62,17 @@ public final class PlayersWars extends JavaPlugin implements Listener {
         Player ply = e.getPlayer();
 
         loadwar.loadPlayer( db, ply, false );
-        discordIntegration.playerJoined();
+        //discordIntegration.playerJoined( ply );
     }
+
+    @EventHandler
+    public void onEntityDamagedByEntity(EntityDamageByEntityEvent e) {
+        War.warHit(e, db);
+    }
+
+    @EventHandler
+    public void onEntityDeath(PlayerDeathEvent e) {
+        War.warKill(e, db);
+    }
+
 }

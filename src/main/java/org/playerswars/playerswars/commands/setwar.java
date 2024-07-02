@@ -1,7 +1,7 @@
 package org.playerswars.playerswars.commands;
 
 import net.md_5.bungee.api.ChatColor;
-import org.playerswars.playerswars.database;
+import org.playerswars.playerswars.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,8 +15,8 @@ import static org.bukkit.Bukkit.getServer;
 
 public class setwar implements CommandExecutor {
 
-    private final database db;
-    public setwar(database db){
+    private final Database db;
+    public setwar(Database db){
         this.db = db;
     }
 
@@ -35,7 +35,7 @@ public class setwar implements CommandExecutor {
             return true;
         }
 
-        String plyName2 = args[0];
+        String plyName2 = args[1];
         Player target2 = Bukkit.getPlayer(plyName2);
         if (target2 == null){
             ply.sendMessage( ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.RED + "Second Player not found!");
@@ -45,19 +45,19 @@ public class setwar implements CommandExecutor {
         try{
 
             String[] targetData = { target1.getUniqueId().toString() };
-            ResultSet warsData = this.db.dbQuery( "SELECT wars FROM xd_apocalypse WHERE uuid = ?",1, targetData );
+            ResultSet warsData = this.db.dbQuery( "SELECT wars FROM xd_playerswars WHERE uuid = ?",1, targetData );
             if (warsData.next()){
                 String warsStr = warsData.getString("wars") + target2.getDisplayName() + ",";
                 String[] targetParams = { warsStr, target1.getUniqueId().toString() };
-                this.db.dbUpdate( "UPDATE xd_apocalypse SET wars = ? WHERE uuid = ?", 2, targetParams );
+                this.db.dbUpdate( "UPDATE xd_playerswars SET wars = ? WHERE uuid = ?", 2, targetParams );
             }
 
             targetData[0] = target2.getUniqueId().toString();
-            warsData = this.db.dbQuery( "SELECT wars FROM xd_apocalypse WHERE uuid = ?",1, targetData );
+            warsData = this.db.dbQuery( "SELECT wars FROM xd_playerswars WHERE uuid = ?",1, targetData );
             if (warsData.next()){
                 String warsStr = warsData.getString("wars") + target1.getDisplayName() + ",";
                 String[] targetParams = { warsStr, target2.getUniqueId().toString() };
-                this.db.dbUpdate( "UPDATE xd_apocalypse SET wars = ? WHERE uuid = ?", 2, targetParams );
+                this.db.dbUpdate( "UPDATE xd_playerswars SET wars = ? WHERE uuid = ?", 2, targetParams );
             }
 
         } catch(SQLException err) {

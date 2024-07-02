@@ -1,7 +1,7 @@
 package org.playerswars.playerswars.commands;
 
 import net.md_5.bungee.api.ChatColor;
-import org.playerswars.playerswars.database;
+import org.playerswars.playerswars.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 
 public class clearwar implements CommandExecutor {
 
-    private final database db;
-    public clearwar(database db ){
+    private final Database db;
+    public clearwar(Database db ){
         this.db = db;
     }
 
@@ -32,7 +32,7 @@ public class clearwar implements CommandExecutor {
 
 
         String[] params = { "", target.getUniqueId().toString() };
-        this.db.dbUpdate( "UPDATE xd_apocalypse SET wars = ? WHERE uuid = ?", 2, params );
+        this.db.dbUpdate( "UPDATE xd_playerswars SET wars = ? WHERE uuid = ?", 2, params );
         ply.sendMessage( ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + "War status has been cleared!" );
         return true;
     }

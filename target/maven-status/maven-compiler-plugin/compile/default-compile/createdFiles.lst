@@ -1,7 +1,8 @@
+org\playerswars\playerswars\Database.class
 org\playerswars\playerswars\commands\clearwar.class
 org\playerswars\playerswars\PlayersWars.class
 org\playerswars\playerswars\commands\debugwar.class
-org\playerswars\playerswars\database.class
 org\playerswars\playerswars\commands\loadwar.class
 org\playerswars\playerswars\commands\setwar.class
 org\playerswars\playerswars\discordIntegration.class
+org\playerswars\playerswars\War.class
