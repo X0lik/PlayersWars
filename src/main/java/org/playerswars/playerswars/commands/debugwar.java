@@ -1,7 +1,8 @@
 package org.playerswars.playerswars.commands;
 
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.playerswars.playerswars.Database;
+import org.playerswars.playerswars.GlowManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,6 +31,8 @@ public class debugwar implements CommandExecutor {
             String[] params = {target.getUniqueId().toString()};
             ResultSet res = this.db.dbQuery("SELECT wars FROM xd_playerswars WHERE uuid = ?", 1, params);
             ply.sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.WHITE + res.getString("wars"));
+            GlowManager.setGlowColor( target, ChatColor.AQUA );
+            GlowManager.setGlow( target, true );
         } catch (SQLException err){
             getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[XD] " + ChatColor.DARK_RED + "Database Error: " + ChatColor.WHITE + err.getErrorCode() + " - " + err.getMessage() );
         }

@@ -6,9 +6,13 @@ import org.playerswars.playerswars.commands.loadwar;
 import org.playerswars.playerswars.commands.setwar;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Particle;
+
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +20,7 @@ import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
 import net.md_5.bungee.api.ChatColor;
+
 
 public final class PlayersWars extends JavaPlugin implements Listener {
 
@@ -60,10 +65,14 @@ public final class PlayersWars extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin( PlayerJoinEvent e ) {
         Player ply = e.getPlayer();
-
         loadwar.loadPlayer( db, ply, false );
-        //discordIntegration.playerJoined( ply );
     }
+
+    /*@EventHandler
+    public void onPlayerJoin( PlayerMoveEvent e ) {
+        Player ply = e.getPlayer();
+        ply.spawnParticle(Particle.GLOW, ply.getLocation(), 50);
+    }*/
 
     @EventHandler
     public void onEntityDamagedByEntity(EntityDamageByEntityEvent e) {

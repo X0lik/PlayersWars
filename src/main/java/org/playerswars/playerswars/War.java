@@ -7,10 +7,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import static org.bukkit.Bukkit.getServer;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Sound;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.entity.EntityType;
 import org.bukkit.Material;
-import org.bukkit.SoundCategory;
 
 import javax.xml.crypto.Data;
 import java.sql.ResultSet;
@@ -21,7 +19,7 @@ import java.util.Objects;
 
 public class War {
 
-    public static boolean canWar( Database db, Player fPly, Player sPly ){
+    public static boolean inWar( Database db, Player fPly, Player sPly ){
         String[] params = {fPly.getUniqueId().toString()};
         try{
             ResultSet res = db.dbQuery( "SELECT wars FROM xd_playerswars WHERE uuid = ?", 1, params );
@@ -80,7 +78,7 @@ public class War {
             if (e.getEntityType() == EntityType.PLAYER) {
                 Player damager = (Player) e.getDamager();
                 Player damaged = (Player) e.getEntity();
-                if ( !canWar(db, damager, damaged) ){
+                if ( !inWar(db, damager, damaged) ){
                     getServer().broadcastMessage(ChatColor.RED + damager.getName() + ChatColor.WHITE + " hitted " + ChatColor.BLUE + damaged.getName() + ChatColor.WHITE + " without a war status!");
                 }
             }
@@ -90,7 +88,7 @@ public class War {
         if (e.getEntity().getKiller() instanceof Player){
             Player killed = (Player) e.getEntity();
             Player killer = (Player) e.getEntity().getKiller();
-            if ( !canWar(db, killer, killed) ){
+            if ( !inWar(db, killer, killed) ){
                 getServer().broadcastMessage(ChatColor.RED + killer.getName() + ChatColor.WHITE + ChatColor.BOLD + " KILLED " + ChatColor.BLUE + killed.getName() + ChatColor.WHITE + " without a war status!");
             } else {
                 winWar( db, killer, killed );
